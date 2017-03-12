@@ -4,8 +4,8 @@ import org.bukkit.Material;
 
 public enum Items {
 
-    COMPASS(Material.COMPASS, "TEST", 1),
-    CHEST(Material.CHEST, "TEST", 1);
+    COMPASS(Material.COMPASS, "Compass_test", 1),
+    CHEST(Material.CHEST, "Chest_test", 1);
 
     Material material;
     String name;

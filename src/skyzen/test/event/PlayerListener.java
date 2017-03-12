@@ -14,7 +14,7 @@ import org.bukkit.util.Vector;
 
 public class PlayerListener implements Listener {
 
-    public final Test main;
+    private final Test main;
 
     public PlayerListener(Test main) {
         this.main = main;
@@ -24,7 +24,6 @@ public class PlayerListener implements Listener {
     public void JoinRunnable(PlayerJoinEvent e) {
 
         final Player p = e.getPlayer();
-
         PlayerInventory inv = p.getInventory();
         inv.setItem(0, ItemModifier.setText(new ItemStack(Material.COMPASS, 1), "§bSélecteur de Kits"));
 
@@ -58,7 +57,7 @@ public class PlayerListener implements Listener {
     @EventHandler
     public void LevelChange(PlayerLevelChangeEvent e) {
         final Player p = e.getPlayer();
-        Title.sendTitle(p, "", "§aBravo vous avez passer un niveau !", 20);
+        Title.sendTitle(p, "", "§bBravo vous êtes passé au niveau: §a" + p.getLevel(), 20);
     }
 
     @EventHandler
@@ -72,8 +71,7 @@ public class PlayerListener implements Listener {
                 player.setVelocity(direction.multiply(1));
                 player.playSound(player.getLocation(), Sound.ENDERDRAGON_WINGS, 1, 1);
                 e.setCancelled(true);
-            } else
-                e.setCancelled(true);
+            } else e.setCancelled(true);
         } else {
             e.setCancelled(true);
             e.getPlayer().setAllowFlight(false);

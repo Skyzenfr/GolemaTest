@@ -27,11 +27,10 @@ public class KitsSelector implements Listener {
         if (e.getCurrentItem().getType() == null) return;
         if (e.getCurrentItem().getType() == Material.CHAINMAIL_CHESTPLATE) {
 
-            ItemStack casque = new ItemStack(Material.CHAINMAIL_HELMET, 1);
-            ItemStack chestplate = new ItemStack(Material.CHAINMAIL_CHESTPLATE, 1);
-            ItemStack legging = new ItemStack(Material.CHAINMAIL_LEGGINGS, 1);
-            ItemStack boot = new ItemStack(Material.CHAINMAIL_BOOTS, 1);
-
+            final ItemStack casque = new ItemStack(Material.CHAINMAIL_HELMET, 1);
+            final ItemStack chestplate = new ItemStack(Material.CHAINMAIL_CHESTPLATE, 1);
+            final ItemStack legging = new ItemStack(Material.CHAINMAIL_LEGGINGS, 1);
+            final ItemStack boot = new ItemStack(Material.CHAINMAIL_BOOTS, 1);
             final PlayerInventory inv = e.getWhoClicked().getInventory();
 
             inv.clear();
@@ -53,14 +52,12 @@ public class KitsSelector implements Listener {
     public void onClickArrow(InventoryClickEvent e) {
         if (!e.getInventory().getTitle().equalsIgnoreCase("Sélecteur de Kits")) return;
         if (e.getCurrentItem().getType() == null) return;
-        if (e.getCurrentItem().getType() == Material.ARROW)
-            e.getWhoClicked().closeInventory();
+        if (e.getCurrentItem().getType() == Material.ARROW) e.getWhoClicked().closeInventory();
     }
 
     @EventHandler
     public void onClick(PlayerInteractEvent e) {
-        if (!(e.getAction() == Action.RIGHT_CLICK_AIR || e.getAction() == Action.RIGHT_CLICK_BLOCK) || e.getItem() == null)
-            return;
+        if (!(e.getAction() == Action.RIGHT_CLICK_AIR || e.getAction() == Action.RIGHT_CLICK_BLOCK) || e.getItem() == null) return;
         if (e.getItem().getType() == Material.COMPASS) {
             final Inventory inv = Bukkit.createInventory(e.getPlayer(), 36, "Sélecteur de Kits");
 
