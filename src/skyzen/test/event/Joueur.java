@@ -2,6 +2,10 @@ package skyzen.test.event;
 
 import org.bukkit.entity.Player;
 
+/**
+ * Copié de mon plugin mini jeux
+ */
+
 public class Joueur
 {
 

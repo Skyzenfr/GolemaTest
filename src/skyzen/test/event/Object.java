@@ -5,6 +5,10 @@ import org.bukkit.entity.Player;
 
 import java.util.ArrayList;
 
+/**
+ * Copié de mon plugin mini jeux
+ */
+
 public class Object
 {
     private final ArrayList<Joueur> joueurs;
