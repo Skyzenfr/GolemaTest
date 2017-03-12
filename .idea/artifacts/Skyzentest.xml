@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="Skyzentest">
+    <output-path>$PROJECT_DIR$/out/artifacts/Skyzentest</output-path>
+    <root id="archive" name="Skyzentest.jar">
+      <element id="module-output" name="Skyzen_test" />
+    </root>
+  </artifact>
+</component>
