@@ -13,22 +13,22 @@ public class Test extends JavaPlugin {
         pm.registerEvents(new PlayerListener(this), this);
         pm.registerEvents(new KitsSelector(this), this);
 
-        getLogger().info("-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-");
+        getLogger().info("===================================");
         getLogger().info("");
         getLogger().info(getDescription().getName());
         getLogger().info("Version " + getDescription().getVersion());
         getLogger().info("");
         getLogger().info("Activated");
-        getLogger().info("-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-");
+        getLogger().info("===================================");
     }
 
     public void onDisable() {
-        getLogger().info("-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-");
+        getLogger().info("===================================");
         getLogger().info("");
         getLogger().info(getDescription().getName());
         getLogger().info("Version " + getDescription().getVersion());
         getLogger().info("");
         getLogger().info("Disabled");
-        getLogger().info("-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-");
+        getLogger().info("===================================");
     }
 }
