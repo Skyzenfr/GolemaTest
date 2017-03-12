@@ -1,26 +1,17 @@
 package skyzen.test;
 
-import org.bukkit.event.Listener;
+import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 import skyzen.test.event.PlayerListener;
 import skyzen.test.kits.KitsSelector;
 
-import java.util.ArrayList;
-
-public class Test extends JavaPlugin{
-
+public class Test extends JavaPlugin {
     public static Test instance;
-    private ArrayList<Listener> listeners;
+    private final PluginManager pm = getServer().getPluginManager();
 
-    public void onEnable(){
-
-        this.listeners = new ArrayList<>();
-
-        /**
-         * initialisation des listeners
-         */
-        listeners.add(new PlayerListener(this));
-        listeners.add(new KitsSelector(this));
+    public void onEnable() {
+        pm.registerEvents(new PlayerListener(this), this);
+        pm.registerEvents(new KitsSelector(this), this);
 
         getLogger().info("-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-");
         getLogger().info("");
@@ -31,8 +22,7 @@ public class Test extends JavaPlugin{
         getLogger().info("-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-");
     }
 
-    public void onDisable(){
-
+    public void onDisable() {
         getLogger().info("-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-");
         getLogger().info("");
         getLogger().info(getDescription().getName());
@@ -41,5 +31,4 @@ public class Test extends JavaPlugin{
         getLogger().info("Disabled");
         getLogger().info("-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-");
     }
-
 }

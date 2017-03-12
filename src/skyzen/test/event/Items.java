@@ -2,29 +2,30 @@ package skyzen.test.event;
 
 import org.bukkit.Material;
 
-public enum Enum {
+public enum Items {
 
-    COMPASS(Material.STONE_PICKAXE,"TEST",1);
+    COMPASS(Material.COMPASS, "TEST", 1),
+    CHEST(Material.CHEST, "TEST", 1);
 
     Material material;
     String name;
     int ammount;
 
-    Enum(Material material,String name,int ammount){
+    Items(Material material, String name, int ammount) {
         this.material = material;
         this.name = name;
         this.ammount = ammount;
     }
 
-    public Material getMaterial(){
+    public Material getMaterial() {
         return this.material;
     }
 
-    public int getAmmount(){
+    public int getAmmount() {
         return this.ammount;
     }
 
-    public String getName(){
+    public String getName() {
         return this.name;
     }
 }

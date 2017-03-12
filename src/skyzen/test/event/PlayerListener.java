@@ -1,6 +1,5 @@
 package skyzen.test.event;
 
-import com.sun.xml.internal.bind.v2.schemagen.xmlschema.Particle;
 import org.bukkit.*;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -18,27 +17,26 @@ public class PlayerListener implements Listener {
     public final Test main;
 
     public PlayerListener(Test main) {
-        this.main = main;}
+        this.main = main;
+    }
 
     @EventHandler
-    public void JoinRunnable(PlayerJoinEvent e){
+    public void JoinRunnable(PlayerJoinEvent e) {
 
-        Player p = e.getPlayer();
+        final Player p = e.getPlayer();
 
         PlayerInventory inv = p.getInventory();
         inv.setItem(0, ItemModifier.setText(new ItemStack(Material.COMPASS, 1), "§bSélecteur de Kits"));
 
-        new Runnable()
-        {
+        new Runnable() {
             final int taskID = Bukkit.getScheduler().scheduleSyncRepeatingTask(main, this, 0L, 100L);
+
             @Override
-            public void run()
-            {
+            public void run() {
                 if (!p.isOnline())
                     Bukkit.getScheduler().cancelTask(taskID);
                 else {
-                    switch (1 + (int) (Math.random() * 4))
-                    {
+                    switch (1 + (int) (Math.random() * 4)) {
                         case 1:
                             Title.sendActionBar(p, "§cLe serveur est cours de développement !");
                             break;
@@ -58,67 +56,58 @@ public class PlayerListener implements Listener {
     }
 
     @EventHandler
-    public void LevelChange(PlayerLevelChangeEvent e){
-
-        Player p = e.getPlayer();
+    public void LevelChange(PlayerLevelChangeEvent e) {
+        final Player p = e.getPlayer();
         Title.sendTitle(p, "", "§aBravo vous avez passer un niveau !", 20);
     }
 
     @EventHandler
-    public void onPlayerToggleFlight(PlayerToggleFlightEvent event) {
-        Player player = event.getPlayer();
-        if (!player.isOp()){
-            event.setCancelled(true);
-            event.getPlayer().setAllowFlight(false); return;
-        }
-        if (player.isOp()){
+    public void onPlayerToggleFlight(PlayerToggleFlightEvent e) {
+        final Player player = e.getPlayer();
+        if (player.isOp()) {
             if (player.getGameMode() == GameMode.CREATIVE) return;
             if (player.getLocation().add(0, -1, 0).getBlock().getType() != Material.AIR || player.getLocation().add(0, -1.5, 0).getBlock().getType() != Material.AIR) {
                 Vector direction = player.getLocation().getDirection();
                 direction.setY(0.85);
                 player.setVelocity(direction.multiply(1));
                 player.playSound(player.getLocation(), Sound.ENDERDRAGON_WINGS, 1, 1);
-                event.setCancelled(true);
-            }else
-                event.setCancelled(true);
-        }else{
-            event.setCancelled(true);
-            event.getPlayer().setAllowFlight(false);
+                e.setCancelled(true);
+            } else
+                e.setCancelled(true);
+        } else {
+            e.setCancelled(true);
+            e.getPlayer().setAllowFlight(false);
         }
     }
 
     @EventHandler
-    public void onPlayerFall(PlayerMoveEvent e)
-    {
-        if (e.getTo().getBlockY() <= 25)
-        {
-            Player p = e.getPlayer();
+    public void onPlayerFall(PlayerMoveEvent e) {
+        if (e.getTo().getBlockY() <= 25) {
+            final Player p = e.getPlayer();
             p.teleport(new Location(Bukkit.getWorld("world"), 0, 0, 0, 0f, 0f));
             Title.sendTitle(p, "", "§cNe vous éloignez pas trop du lobby !", 20);
         }
     }
 
     @EventHandler
-    public void onPlayerCommand(PlayerCommandPreprocessEvent e){
+    public void onPlayerCommand(PlayerCommandPreprocessEvent e) {
         String msg = e.getMessage();
         String[] args = msg.split(" ");
-        if ((args[0].equalsIgnoreCase("/pl")) || (args[0].equalsIgnoreCase("/plugins"))){
+        if ((args[0].equalsIgnoreCase("/pl")) || (args[0].equalsIgnoreCase("/plugins"))) {
             e.setCancelled(true);
-        }else if(((args[0].equalsIgnoreCase("/help")) || (args[0].equalsIgnoreCase("/?")))){
+        } else if (((args[0].equalsIgnoreCase("/help")) || (args[0].equalsIgnoreCase("/?")))) {
             e.setCancelled(true);
         }
     }
 
     @EventHandler
-    public void Chat(AsyncPlayerChatEvent e){
-
+    public void Chat(AsyncPlayerChatEvent e) {
         String Msg = e.getMessage();
         Msg = Msg.replace("&", "§");
-        Player p = e.getPlayer();
-
-        if (p.isOp()){
+        final Player p = e.getPlayer();
+        if (p.isOp()) {
             e.setFormat("§c[Administrateur] " + p.getDisplayName() + " §8➽ §f" + Msg);
-        }else{
+        } else {
             e.setFormat("§7" + p.getDisplayName() + " §8➽ §f" + Msg);
         }
     }

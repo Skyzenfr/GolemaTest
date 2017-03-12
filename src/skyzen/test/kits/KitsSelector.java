@@ -9,68 +9,59 @@ import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.PlayerInventory;
 import skyzen.test.Test;
 import skyzen.test.utils.ItemModifier;
 
-public class KitsSelector implements Listener
-{
+public class KitsSelector implements Listener {
 
     private final Test plugin;
 
-    public KitsSelector(Test main)
-    {
+    public KitsSelector(Test main) {
         this.plugin = main;
     }
 
     @EventHandler
-    public void onClickTank(InventoryClickEvent e)
-    {
+    public void onClickTank(InventoryClickEvent e) {
         if (!e.getInventory().getTitle().equalsIgnoreCase("Sélecteur de Kits")) return;
         if (e.getCurrentItem().getType() == null) return;
-        if (e.getCurrentItem().getType() == Material.CHAINMAIL_CHESTPLATE)
-        {
+        if (e.getCurrentItem().getType() == Material.CHAINMAIL_CHESTPLATE) {
 
-            //Actions
             ItemStack casque = new ItemStack(Material.CHAINMAIL_HELMET, 1);
             ItemStack chestplate = new ItemStack(Material.CHAINMAIL_CHESTPLATE, 1);
             ItemStack legging = new ItemStack(Material.CHAINMAIL_LEGGINGS, 1);
             ItemStack boot = new ItemStack(Material.CHAINMAIL_BOOTS, 1);
 
-            e.getWhoClicked().getInventory().clear();
-            e.getWhoClicked().getInventory().setItem(0,new ItemStack(Material.DIAMOND_SWORD));
-            e.getWhoClicked().getInventory().setItem(1,new ItemStack(Material.BOW));
-            e.getWhoClicked().getInventory().setItem(24,new ItemStack(Material.ARROW));
-            e.getWhoClicked().getInventory().setHelmet(casque);
-            e.getWhoClicked().getInventory().setChestplate(chestplate);
-            e.getWhoClicked().getInventory().setLeggings(legging);
-            e.getWhoClicked().getInventory().setBoots(boot);
+            final PlayerInventory inv = e.getWhoClicked().getInventory();
+
+            inv.clear();
+            inv.setItem(0, new ItemStack(Material.DIAMOND_SWORD));
+            inv.setItem(1, new ItemStack(Material.BOW));
+            inv.setItem(24, new ItemStack(Material.ARROW));
+            inv.setHelmet(casque);
+            inv.setChestplate(chestplate);
+            inv.setLeggings(legging);
+            inv.setBoots(boot);
 
             e.getWhoClicked().sendMessage("§7[§eKits§7] §eVous avez choisi le Kit: §bTank");
-
-            //close l'inventaire
             e.getWhoClicked().closeInventory();
             e.setCancelled(true);
         }
     }
 
     @EventHandler
-    public void onClickArrow(InventoryClickEvent e)
-    {
+    public void onClickArrow(InventoryClickEvent e) {
         if (!e.getInventory().getTitle().equalsIgnoreCase("Sélecteur de Kits")) return;
         if (e.getCurrentItem().getType() == null) return;
         if (e.getCurrentItem().getType() == Material.ARROW)
-        {
             e.getWhoClicked().closeInventory();
-        }
     }
 
     @EventHandler
-    public void onClick(PlayerInteractEvent e)
-    {
+    public void onClick(PlayerInteractEvent e) {
         if (!(e.getAction() == Action.RIGHT_CLICK_AIR || e.getAction() == Action.RIGHT_CLICK_BLOCK) || e.getItem() == null)
             return;
-        if (e.getItem().getType() == Material.COMPASS)
-        {
+        if (e.getItem().getType() == Material.COMPASS) {
             final Inventory inv = Bukkit.createInventory(e.getPlayer(), 36, "Sélecteur de Kits");
 
             //première ligne
