@@ -7,9 +7,9 @@ import skyzen.test.kits.KitsSelector;
 
 public class Test extends JavaPlugin {
     public static Test instance;
-    private final PluginManager pm = getServer().getPluginManager();
 
-    public void onEnable() {
+    public void onEnable(){
+        final PluginManager pm = getServer().getPluginManager();
         pm.registerEvents(new PlayerListener(this), this);
         pm.registerEvents(new KitsSelector(this), this);
 

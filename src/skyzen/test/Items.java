@@ -1,4 +1,4 @@
-package skyzen.test.event;
+package skyzen.test;
 
 import org.bukkit.Material;
 

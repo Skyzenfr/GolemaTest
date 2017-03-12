@@ -1,4 +1,4 @@
-package skyzen.test.event;
+package skyzen.test.team;
 
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
